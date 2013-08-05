@@ -1,29 +1,26 @@
 body{
-	background-color: white;
+
 }
 
 .ui-content{
-	background-color:white;
+
 }
 
 .ui-page{
-	background-color:white;
+
 }
 
-#slider{
-	text-align: center;  
-}
 
 .behind{
 	text-align: center;
-	position: relative;
-	margin-top: -373px;
+	position: absolute;
 	z-index: -1;
 	opacity: .2;
 }
 
 .comingUp{
 	text-align: center;
+	background-image: url('http://images.asos-media.com/inv/media/2/2/2/6/3136222/black/image1xl.jpg') !important;
 }
 
 .animate{
@@ -40,6 +37,22 @@ body{
     transition: transform .4s;
 }
 
-#slider img{
+.imageBox{
+	text-align: center;
+	overflow: hidden;
+	width: 300px;
+	height: 300px;
+	border-radius: 1000px;
+	background-image: url('http://images.asos-media.com/inv/media/4/5/6/5/3005654/black/image1xl.jpg');
+	background-position-y: -52px;
+	background-position-x: 11px;
+	margin: auto;
+	border: 8px solid grey;
+}
 
+#slider{
+}
+
+#slider img{
+	display: none;
 }
