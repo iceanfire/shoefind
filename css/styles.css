@@ -1,0 +1,45 @@
+body{
+	background-color: white;
+}
+
+.ui-content{
+	background-color:white;
+}
+
+.ui-page{
+	background-color:white;
+}
+
+#slider{
+	text-align: center;  
+}
+
+.behind{
+	text-align: center;
+	position: relative;
+	margin-top: -373px;
+	z-index: -1;
+	opacity: .2;
+}
+
+.comingUp{
+	text-align: center;
+}
+
+.animate{
+	-webkit-transition: all .4s;
+	-moz-transition: all .4s;
+    -o-transition: all .4s;
+    transition: all .4s;
+}
+
+.animateRock{
+	-webkit-transition: -webkit-transform .4s;
+	-moz-transition: -moz-transform .4s;
+    -o-transition: -o-transform .4s;
+    transition: transform .4s;
+}
+
+#slider img{
+
+}
