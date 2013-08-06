@@ -16,18 +16,18 @@ body{
 	position: absolute;
 	z-index: -1;
 	opacity: .2;
+	display: none;
 }
 
 .comingUp{
 	text-align: center;
-	background-image: url('http://images.asos-media.com/inv/media/2/2/2/6/3136222/black/image1xl.jpg') !important;
 }
 
 .animate{
-	-webkit-transition: all .4s;
+	-webkit-transition: all .1s;
 	-moz-transition: all .4s;
     -o-transition: all .4s;
-    transition: all .4s;
+    transition: all .1s;
 }
 
 .animateRock{
@@ -40,14 +40,18 @@ body{
 .imageBox{
 	text-align: center;
 	overflow: hidden;
-	width: 300px;
-	height: 300px;
+	width: 290px;
+	height: 290px;
 	border-radius: 1000px;
-	background-image: url('http://images.asos-media.com/inv/media/4/5/6/5/3005654/black/image1xl.jpg');
 	background-position-y: -52px;
 	background-position-x: 11px;
 	margin: auto;
 	border: 8px solid grey;
+}
+
+.ui-content{
+	padding-left: 0;
+	padding-right: 0;
 }
 
 #slider{

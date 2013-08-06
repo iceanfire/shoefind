@@ -30,18 +30,78 @@
 
 
 
-var element = $('#slider');
-var nextElement = $('.behind');
+var element = null;
+
+
+//this is a sample data array that would go in
+//DELETE BELOW
+//=============================================
+var asosData = [['000',"£58.00", "http://images.asos-media.com/inv/media/1/4/3/9/2969341/black/image1xl.jpg", "/ASOS/ASOS-ANTICIPATE-Leather-Cut-Out-Ankle-Boots/Prod/pgeproduct.aspx?iid=2969341&cid=4172&sh=0&pge=0&pgesize=204&sort=-1&clr=Black"]];
+
+asosData.push(['001',"£55.00", "http://images.asos-media.com/inv/media/4/5/6/5/3005654/black/image1xl.jpg", "/ASOS/ASOS-AUCKLAND-Cut-Out-Ankle-Boots/Prod/pgeproduct.aspx?iid=3005654&cid=4172&sh=0&pge=0&pgesize=204&sort=-1&clr=Black"]);
+
+asosData.push(['002',"£65.00", "http://images.asos-media.com/inv/media/0/5/9/1/3271950/navysoftgreen/image1xl.jpg", "/Onitsuka-Tiger/Onitsuka-Tiger-Colorado-Eighty-Five-Trainers/Prod/pgeproduct.aspx?iid=3271950&cid=4172&sh=0&pge=0&pgesize=204&sort=-1&clr=Navy%2fsoft+green"
+]);
+////////////////////////////////////////////////
+
+function initialize(data){
+	//Setup page at bootup
+	//the dataset will include:[ id (key), price, imagelink, productlink,name]
+	var sliderHtml = '<div id="slider" class="imageBox animateRock"></div>';
+	var behindHtml = '<div class="behind imageBox"></div>';
+	var comingUpHtml = '<div class="behind comingUp imageBox"></div>';
+
+	$('#homeContent').html(sliderHtml);
+	$('#slider').css('background-image','url('+asosData[0][2]+')').hammer({drag_lock_to_axis:true}).on("release dragleft dragright swipeleft swiperight", handleHammer);
+	
+	
+
+	for(var i=1; i<data.length; i++)
+	{
+		if(i==1){
+			$('#homeContent').append(comingUpHtml);
+
+		}
+		else{
+			$('#homeContent').append(behindHtml);
+		}
+
+	}
+
+	$('.behind').each(function(index){
+		arrayNum = index+1;
+		var backgroundImg = "url('"+data[arrayNum][2]+"')";
+		$(this).css('background-image',backgroundImg);
+		$(this).css('background-color','red');
+	})
+
+	element = $('#slider');
+}
+
+initialize(asosData);
 
 function destroyOld(){
 	element.remove();
+	element.hammer().off("release dragleft dragright swipeleft swiperight");
+
 	$('.comingUp').attr('id','slider');
 	element = $('#slider');
+	element.css('background-image',$('.imageBox').css('background-image'));
+
+	$('.comingUp').removeClass('comingUp');
+	$('.behind').first().addClass('comingUp')
+
 	element.hammer({drag_lock_to_axis:true}).on("release dragleft dragright swipeleft swiperight", handleHammer);
+	
+	var randomItem = Math.floor(Math.random()*asosData.length) //this may have to change
+
+	buildNew(asosData[randomItem]);
 }
 
-function buildNew(){
-	
+function buildNew(randomItem){
+	var backgroundImg = "url('"+randomItem[2]+"')";
+	newProduct = $('<div class="behind imageBox"></div>').css('background-image',backgroundImg);
+	$('#homeContent').append(newProduct);
 }
 
 
@@ -62,7 +122,7 @@ function rotate(deg){
 
 function handleHammer(ev){
 	//disable browser scrolling
-	ev.gesture.preventDefault();
+	//ev.gesture.preventDefault();
 	picturePosition = 0;
 	switch(ev.type){
 		case 'dragright':
@@ -71,7 +131,7 @@ function handleHammer(ev){
 			//if(element.css('left')!="auto")	{var picturePosition = parseInt(element.css('left').replace("px",""));}
 			//else{ var picturePosition = 0; }
 			
-			$('.behind').removeClass('behind');
+			$('.comingUp').removeClass('behind');
 
 			//
 
@@ -96,22 +156,24 @@ function handleHammer(ev){
 				}
 			}
 
-			console.log(ev.gesture.deltaX);
+			console.log(ev.gesture.velocityX);
 
 			break;
 		case 'swipeleft':
 			animate()
 			element.css('left','-1000px');
-			ev.gesture.stopDetect();
+
+		//	ev.gesture.stopDetect();
 			break;
 		case 'swiperight':
 			animate();
 			element.css('left','1000px');
-			ev.gesture.stopDetect();
+		//	ev.gesture.stopDetect();
 			break;
 		case 'release':
 			animate();
-			if(Math.abs(ev.gesture.deltaX)<(element.width()/2)){
+			if(Math.abs(ev.gesture.deltaX)<(element.width()/2)&&ev.gesture.velocityX<.2){
+
 				element.css('position','static');
 				element.css('left','auto');
 				rotate('0');
@@ -132,5 +194,4 @@ function handleHammer(ev){
 	}
 }
 
-element.hammer({drag_lock_to_axis:true}).on("release dragleft dragright swipeleft swiperight", handleHammer);
 
