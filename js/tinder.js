@@ -65,6 +65,7 @@ function initialize(data){
 
 	for(var i=1; i<data.length; i++)
 	{
+
 		if(i==1){
 			$('#pictureWrapper').append(comingUpHtml);
 
@@ -78,15 +79,32 @@ function initialize(data){
 	$('.behind').each(function(index){
 		arrayNum = index+1;
 		var backgroundImg = "url('"+data[arrayNum][2]+"')";
-		$(this).css('background-image',backgroundImg);
+		//$(this).css('background-image',backgroundImg);
 		$(this).css('background-color','red');
 	})
 
 	element = $('#slider');
 	productName = $('.productName');
+
+	$('#toggle-wishlist').click(function() {
+		$('#wishlist').toggleClass("hidden");
+	});
 }
 
 initialize(asosData);
+
+function showWishListItem(item) {
+	var newDiv = $('<div/>', {
+		"class": 		"wish-list-item",
+		"data-id":  	item.dataId,
+		"data-price":   item.price,
+		"data-image":   item.image,
+		"data-link":    item.link,
+		"data-name":    item.name,
+		"style": 		"background-image: url(" + item.image + ")"
+	});
+	$('#wishlist').append(newDiv);
+}
 
 function addToWishList() {
 	var id = element.attr('data-id');
@@ -95,6 +113,7 @@ function addToWishList() {
 	var item = $.parseJSON(localStorage.getItem(id))
 	if (item) {
 		if (item.inWishlist) {
+
 			return false
 		}
 	} else {
@@ -110,6 +129,7 @@ function addToWishList() {
 	item.inWishList = true;
 
 	localStorage.setItem(id, JSON.stringify(item));
+	showWishListItem(item);
 }
 
 function destroyOld(){
@@ -120,7 +140,7 @@ function destroyOld(){
 	$('.comingUp').attr('id','slider');
 
 	element = $('#slider');
-	element.css('background-image',$('.imageBox').css('background-image'));
+	//element.css('background-image',$('.imageBox').css('background-image'));
 
 	$('.comingUp').removeClass('comingUp');
 	$('.behind').first().addClass('comingUp')
@@ -128,7 +148,7 @@ function destroyOld(){
 	element.hammer({drag_lock_to_axis:true}).on("release dragleft dragright swipeleft swiperight", handleHammer);
 	
 	var randomItem = Math.floor(Math.random()*asosData.length) //this may have to change
-
+	element.css('background-image','url(' + asosData[randomItem][2] + ')');
 	buildNew(asosData[randomItem]);
 }
 
@@ -142,11 +162,10 @@ function buildNew(randomItem){
 	});
 
 	var backgroundImg = "url('"+randomItem[2]+"')";
-	newProduct = $('<div class="behind imageBox"></div>').css('background-image',backgroundImg);
+	newProduct = $('<div class="behind imageBox"></div>').css('background-image', backgroundImg);
 	$('#pictureWrapper').append(newProduct);
 
 	productName.append(randomItem[4] + ' - £' + randomItem[1]);
-
 }
 
 
@@ -161,7 +180,7 @@ function deAnimate(){
 }
 
 function rotate(deg){
-	element.css('-webkit-transform','rotate('+deg+'deg)');
+	element.css('-webkit-transform','rotate(' + deg + 'deg)');
 }
 
 
