@@ -47,7 +47,12 @@ var productName = null;
 function initialize(data){
 	//Setup page at bootup
 	//the dataset will include:[ id (key), price, imagelink, productlink,name]
-	var sliderHtml = '<div id="slider" class="imageBox animateRock"></div>';
+	var sliderHtml = '<div id="slider" class="imageBox animateRock" data-id="' + asosData[0][0] + 
+					 '" data-price="' + asosData[0][1] +
+					 '" data-image="' + asosData[0][2] +
+					 '" data-link="' + asosData[0][3] +
+					 '" data-name="' + asosData[0][4] +
+					 '"></div>';
 	var behindHtml = '<div class="behind imageBox"></div>';
 	var comingUpHtml = '<div class="behind comingUp imageBox"></div>';
 	var productNameHtml = '<div class="productName animate">' + asosData[0][4] + ' - £' + asosData[0][1] + ' </div>';
@@ -89,6 +94,7 @@ function destroyOld(){
 	productName.empty();
 
 	$('.comingUp').attr('id','slider');
+
 	element = $('#slider');
 	element.css('background-image',$('.imageBox').css('background-image'));
 
@@ -103,6 +109,14 @@ function destroyOld(){
 }
 
 function buildNew(randomItem){
+	element.attr({
+		"data-id": randomItem[0],
+		"data-price": randomItem[1],
+		"data-image": randomItem[2],
+		"data-link": randomItem[3],
+		"data-name": randomItem[4]
+	});
+
 	var backgroundImg = "url('"+randomItem[2]+"')";
 	newProduct = $('<div class="behind imageBox"></div>').css('background-image',backgroundImg);
 	$('#pictureWrapper').append(newProduct);
@@ -167,7 +181,7 @@ function handleHammer(ev){
 
 			break;
 		case 'swipeleft':
-			animate()
+			animate();
 			element.css('left','-1000px');
 
 		//	ev.gesture.stopDetect();
