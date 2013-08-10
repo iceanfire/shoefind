@@ -88,6 +88,30 @@ function initialize(data){
 
 initialize(asosData);
 
+function addToWishList() {
+	var id = element.attr('data-id');
+
+	// Already in Wish List?
+	var item = $.parseJSON(localStorage.getItem(id))
+	if (item) {
+		if (item.inWishlist) {
+			return false
+		}
+	} else {
+		item = {
+			dataId: id,
+			price: element.attr('data-price'),
+			image: element.attr('data-image'),
+			link: element.attr('data-link'),
+			name: element.attr('data-name')
+		};
+	}
+
+	item.inWishList = true;
+
+	localStorage.setItem(id, JSON.stringify(item));
+}
+
 function destroyOld(){
 	element.remove();
 	element.hammer().off("release dragleft dragright swipeleft swiperight");
@@ -207,6 +231,7 @@ function handleHammer(ev){
 				}
 				else{
 					element.css('left','1000px');
+					addToWishList();
 				}
 				destroyOld();
 			}
