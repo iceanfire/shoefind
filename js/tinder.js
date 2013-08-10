@@ -44,6 +44,18 @@ var productName = null;
 // ]);
 ////////////////////////////////////////////////
 
+Array.prototype.getUnique = function(){
+   var u = {}, a = [];
+   for(var i = 0, l = this.length; i < l; ++i){
+      if(u.hasOwnProperty(this[i])) {
+         continue;
+      }
+      a.push(this[i]);
+      u[this[i]] = 1;
+   }
+   return a;
+}
+
 function initialize(data){
 	//Setup page at bootup
 	//the dataset will include:[ id (key), price, imagelink, productlink,name]
@@ -61,8 +73,6 @@ function initialize(data){
 	$('#homeContent').append(productNameHtml);
 	$('#slider').css('background-image','url('+asosData[0][2]+')').hammer({drag_lock_to_axis:true}).on("release dragleft dragright swipeleft swiperight", handleHammer);
 	
-	
-
 	for(var i=1; i<data.length; i++)
 	{
 
@@ -86,12 +96,34 @@ function initialize(data){
 	element = $('#slider');
 	productName = $('.productName');
 
+	buildWishList();
+
 	$('#toggle-wishlist').click(function() {
 		$('#wishlist').toggleClass("hidden");
 	});
 }
 
 initialize(asosData);
+initWishList();
+
+function initWishList() {
+	var wishList = $.parseJSON(localStorage.getItem("wishList"));
+	if (wishList) {
+		wishList = wishList.getUnique();
+	} else {
+		wishList = [];
+	}
+	localStorage.setItem("wishList", JSON.stringify(wishList));
+}
+
+function removeWishListItem(dataId) {
+	localStorage.removeItem(dataId);
+	var wishList = $.parseJSON(localStorage.getItem("wishList"));
+	if (wishList) {
+		wishList.reduce(function(arr, id, index, myarr) { if (id != dataId) { arr.push(dataId) };return arr; }, []);
+		localStorage.setItem("wishList", JSON.stringify(wishList));
+	}
+}
 
 function showWishListItem(item) {
 	var newDiv = $('<div/>', {
@@ -103,7 +135,32 @@ function showWishListItem(item) {
 		"data-name":    item.name,
 		"style": 		"background-image: url(" + item.image + ")"
 	});
-	$('#wishlist').append(newDiv);
+	var newWishListRow = $('<div class="wish-list-row" id="wish-list-row-' + item.dataId + '">' +
+						 '<a href="http://www.asos.com' + item.link + '"></a>' +
+						 '<div class="remove">Remove item</div></div>');
+
+	newWishListRow.find('a').append(newDiv)
+							.append('<span class="item-name">' + item.name + '</span>');
+	newWishListRow.find('div.remove').click(function() {
+		removeWishListItem(item.dataId);
+		$("#wish-list-row-" + item.dataId).remove();
+	})
+	$('#wishlist').append(newWishListRow);
+}
+
+function buildWishList() {
+	var wishList = localStorage.getItem("wishList");
+
+	if (wishList) {
+		wishList = $.parseJSON(wishList);
+
+		$.each(wishList, function(i, wishListItemId) {
+			var wishListItem = localStorage.getItem(wishListItemId);
+			if (wishListItem) {
+				showWishListItem($.parseJSON(wishListItem));
+			};
+		});
+	};
 }
 
 function addToWishList() {
@@ -128,8 +185,20 @@ function addToWishList() {
 
 	item.inWishList = true;
 
-	localStorage.setItem(id, JSON.stringify(item));
-	showWishListItem(item);
+	if (!localStorage.getItem(id)) {
+		localStorage.setItem(id, JSON.stringify(item));
+		showWishListItem(item);
+
+		var wishList = undefined;
+		if (wishList = localStorage.getItem("wishList")) {
+			wishList = $.parseJSON(wishList);
+			wishList.push(id);
+		} else {
+			wishList = [id];
+		}
+
+		localStorage.setItem("wishList", JSON.stringify(wishList));
+	}
 }
 
 function destroyOld(){
