@@ -50,7 +50,7 @@ function initialize(data){
 	var sliderHtml = '<div id="slider" class="imageBox animateRock"></div>';
 	var behindHtml = '<div class="behind imageBox"></div>';
 	var comingUpHtml = '<div class="behind comingUp imageBox"></div>';
-	var productNameHtml = '<div class="productName animate">Product Name Goes Here - '+asosData[0][1]+' </div>';
+	var productNameHtml = '<div class="productName animate">' + asosData[0][4] + ' - £' + asosData[0][1] + ' </div>';
 
 	$('#pictureWrapper').html(sliderHtml);
 	$('#homeContent').append(productNameHtml);
@@ -107,7 +107,7 @@ function buildNew(randomItem){
 	newProduct = $('<div class="behind imageBox"></div>').css('background-image',backgroundImg);
 	$('#pictureWrapper').append(newProduct);
 
-	productName.append('Product Name Goes Here - '+randomItem[1]);
+	productName.append(randomItem[4] + ' - £' + randomItem[1]);
 
 }
 
