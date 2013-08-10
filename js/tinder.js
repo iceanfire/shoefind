@@ -31,7 +31,7 @@
 
 
 var element = null;
-
+var productName = null;
 
 //this is a sample data array that would go in
 //DELETE BELOW
@@ -50,8 +50,10 @@ function initialize(data){
 	var sliderHtml = '<div id="slider" class="imageBox animateRock"></div>';
 	var behindHtml = '<div class="behind imageBox"></div>';
 	var comingUpHtml = '<div class="behind comingUp imageBox"></div>';
+	var productNameHtml = '<div class="productName animate">Product Name Goes Here - '+asosData[0][1]+' </div>';
 
-	$('#homeContent').html(sliderHtml);
+	$('#pictureWrapper').html(sliderHtml);
+	$('#homeContent').append(productNameHtml);
 	$('#slider').css('background-image','url('+asosData[0][2]+')').hammer({drag_lock_to_axis:true}).on("release dragleft dragright swipeleft swiperight", handleHammer);
 	
 	
@@ -59,11 +61,11 @@ function initialize(data){
 	for(var i=1; i<data.length; i++)
 	{
 		if(i==1){
-			$('#homeContent').append(comingUpHtml);
+			$('#pictureWrapper').append(comingUpHtml);
 
 		}
 		else{
-			$('#homeContent').append(behindHtml);
+			$('#pictureWrapper').append(behindHtml);
 		}
 
 	}
@@ -76,6 +78,7 @@ function initialize(data){
 	})
 
 	element = $('#slider');
+	productName = $('.productName');
 }
 
 initialize(asosData);
@@ -83,6 +86,7 @@ initialize(asosData);
 function destroyOld(){
 	element.remove();
 	element.hammer().off("release dragleft dragright swipeleft swiperight");
+	productName.empty();
 
 	$('.comingUp').attr('id','slider');
 	element = $('#slider');
@@ -101,7 +105,10 @@ function destroyOld(){
 function buildNew(randomItem){
 	var backgroundImg = "url('"+randomItem[2]+"')";
 	newProduct = $('<div class="behind imageBox"></div>').css('background-image',backgroundImg);
-	$('#homeContent').append(newProduct);
+	$('#pictureWrapper').append(newProduct);
+
+	productName.append('Product Name Goes Here - '+randomItem[1]);
+
 }
 
 
