@@ -36,12 +36,12 @@ var element = null;
 //this is a sample data array that would go in
 //DELETE BELOW
 //=============================================
-var asosData = [['000',"£58.00", "http://images.asos-media.com/inv/media/1/4/3/9/2969341/black/image1xl.jpg", "/ASOS/ASOS-ANTICIPATE-Leather-Cut-Out-Ankle-Boots/Prod/pgeproduct.aspx?iid=2969341&cid=4172&sh=0&pge=0&pgesize=204&sort=-1&clr=Black"]];
+// var asosData = [['000',"£58.00", "http://images.asos-media.com/inv/media/1/4/3/9/2969341/black/image1xl.jpg", "/ASOS/ASOS-ANTICIPATE-Leather-Cut-Out-Ankle-Boots/Prod/pgeproduct.aspx?iid=2969341&cid=4172&sh=0&pge=0&pgesize=204&sort=-1&clr=Black"]];
 
-asosData.push(['001',"£55.00", "http://images.asos-media.com/inv/media/4/5/6/5/3005654/black/image1xl.jpg", "/ASOS/ASOS-AUCKLAND-Cut-Out-Ankle-Boots/Prod/pgeproduct.aspx?iid=3005654&cid=4172&sh=0&pge=0&pgesize=204&sort=-1&clr=Black"]);
+// asosData.push(['001',"£55.00", "http://images.asos-media.com/inv/media/4/5/6/5/3005654/black/image1xl.jpg", "/ASOS/ASOS-AUCKLAND-Cut-Out-Ankle-Boots/Prod/pgeproduct.aspx?iid=3005654&cid=4172&sh=0&pge=0&pgesize=204&sort=-1&clr=Black"]);
 
-asosData.push(['002',"£65.00", "http://images.asos-media.com/inv/media/0/5/9/1/3271950/navysoftgreen/image1xl.jpg", "/Onitsuka-Tiger/Onitsuka-Tiger-Colorado-Eighty-Five-Trainers/Prod/pgeproduct.aspx?iid=3271950&cid=4172&sh=0&pge=0&pgesize=204&sort=-1&clr=Navy%2fsoft+green"
-]);
+// asosData.push(['002',"£65.00", "http://images.asos-media.com/inv/media/0/5/9/1/3271950/navysoftgreen/image1xl.jpg", "/Onitsuka-Tiger/Onitsuka-Tiger-Colorado-Eighty-Five-Trainers/Prod/pgeproduct.aspx?iid=3271950&cid=4172&sh=0&pge=0&pgesize=204&sort=-1&clr=Navy%2fsoft+green"
+// ]);
 ////////////////////////////////////////////////
 
 function initialize(data){
