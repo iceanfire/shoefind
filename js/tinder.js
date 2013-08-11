@@ -33,17 +33,6 @@
 var element = null;
 var productName = null;
 
-//this is a sample data array that would go in
-//DELETE BELOW
-//=============================================
-// var asosData = [['000',"£58.00", "http://images.asos-media.com/inv/media/1/4/3/9/2969341/black/image1xl.jpg", "/ASOS/ASOS-ANTICIPATE-Leather-Cut-Out-Ankle-Boots/Prod/pgeproduct.aspx?iid=2969341&cid=4172&sh=0&pge=0&pgesize=204&sort=-1&clr=Black"]];
-
-// asosData.push(['001',"£55.00", "http://images.asos-media.com/inv/media/4/5/6/5/3005654/black/image1xl.jpg", "/ASOS/ASOS-AUCKLAND-Cut-Out-Ankle-Boots/Prod/pgeproduct.aspx?iid=3005654&cid=4172&sh=0&pge=0&pgesize=204&sort=-1&clr=Black"]);
-
-// asosData.push(['002',"£65.00", "http://images.asos-media.com/inv/media/0/5/9/1/3271950/navysoftgreen/image1xl.jpg", "/Onitsuka-Tiger/Onitsuka-Tiger-Colorado-Eighty-Five-Trainers/Prod/pgeproduct.aspx?iid=3271950&cid=4172&sh=0&pge=0&pgesize=204&sort=-1&clr=Navy%2fsoft+green"
-// ]);
-////////////////////////////////////////////////
-
 Array.prototype.getUnique = function(){
    var u = {}, a = [];
    for(var i = 0, l = this.length; i < l; ++i){
@@ -72,13 +61,13 @@ function initialize(data){
 	$('#pictureWrapper').html(sliderHtml);
 	$('#homeContent').append(productNameHtml);
 	$('#slider').css('background-image','url('+asosData[0][2]+')').hammer({drag_lock_to_axis:true}).on("release dragleft dragright swipeleft swiperight", handleHammer);
-	
-	for(var i=1; i<data.length; i++)
-	{
 
+	var numOfInitials = 10;
+	
+	for(var i=1; i<numOfInitials; i++)
+	{
 		if(i==1){
 			$('#pictureWrapper').append(comingUpHtml);
-
 		}
 		else{
 			$('#pictureWrapper').append(behindHtml);
@@ -90,7 +79,7 @@ function initialize(data){
 		arrayNum = index+1;
 		var backgroundImg = "url('"+data[arrayNum][2]+"')";
 		//$(this).css('background-image',backgroundImg);
-		$(this).css('background-color','red');
+		$(this).css('background-color','grey');
 	})
 
 	element = $('#slider');
@@ -136,8 +125,8 @@ function showWishListItem(item) {
 		"style": 		"background-image: url(" + item.image + ")"
 	});
 	var newWishListRow = $('<div class="wish-list-row" id="wish-list-row-' + item.dataId + '">' +
-						 '<a href="http://www.asos.com' + item.link + '"></a>' +
-						 '<div class="remove">Remove item</div></div>');
+						 '<a target="_blank" href="http://m.asos.com' + item.link + '"></a>' +
+						 '<div class="remove">X</div></div>');
 
 	newWishListRow.find('a').append(newDiv)
 							.append('<span class="item-name">' + item.name + '</span>');
@@ -255,7 +244,7 @@ function rotate(deg){
 
 function handleHammer(ev){
 	//disable browser scrolling
-	//ev.gesture.preventDefault();
+	ev.gesture.preventDefault();
 	picturePosition = 0;
 	switch(ev.type){
 		case 'dragright':
