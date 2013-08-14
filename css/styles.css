@@ -2,6 +2,10 @@ body{
 
 }
 
+#logo{
+	height: 45px;
+}
+
 .ui-content{
 
 }
@@ -10,6 +14,22 @@ body{
 
 }
 
+#instructions{
+	text-align: center;
+	padding: 20px 0 0 0;
+	z-index: -1;
+}
+
+#instructions img{
+	margin: auto;
+	height: 28px;
+	margin: auto;
+	
+}
+
+#homeContent{
+	padding-top: 27px;
+}
 
 .behind{
 	text-align: center;
@@ -40,13 +60,18 @@ body{
 .imageBox{
 	text-align: center;
 	overflow: hidden;
-	width: 290px;
-	height: 290px;
+	width: 300px;
+	height: 300px;
 	border-radius: 1000px;
-	background-position-y: -52px;
-	background-position-x: 11px;
+	background-position-y: -61px;
+	background-position-x: 3px;
 	margin: auto;
-	border: 8px solid #63AFBE;
+	//border: 2px solid #DBDBDB;
+	box-shadow: 6px 6px 11px #F8F8F8;
+}
+
+.ui-page{
+	background-color: white !important; //this is to over-ride the background for square images
 }
 
 .ui-content{
@@ -73,6 +98,8 @@ body{
 	font-family: helvetica, verdana;
 	font-weight: normal;
 	font-size: 20px;
+
+	display: none;
 }
 
 #wishlist {
@@ -82,7 +109,26 @@ body{
 	width: 100%;
 	margin: 0 auto 0 auto;
 	background-color: #FFFFFF;
+	z-index: 1;
 }
+
+#toggle-wishlist img{
+	width: 23px;
+	opacity: .99;
+	padding-top: 15px;
+}
+
+#toggle-wishlist{
+	position: absolute;
+	display: inline-block;
+	top: 0px;
+	right: -1px;
+	height: 100%;
+	border-left: 1px solid #3E3E3E;
+	width: 46px;
+	text-align: center;
+}
+
 
 .ui-btn {
 	float: right;
@@ -128,16 +174,15 @@ body{
 	height: 40px;
 	margin-top: 23px;
 	margin-right: 15px;
-	color: #FF0000;
+	color: white;
 	cursor: pointer;
-	color: black;
-	cursor: pointer;
-	background-color: #63AFBE;
+	background-color: black;
 	padding: 4px;
 	height: 10px;
 	border-radius: 45px;
 	width: 10px;
 	padding-top: 2px;
 	padding-bottom: 6px;
-	padding-left: 4px;
+	padding-left: 5px;
+	font-family: verdana;
 }

@@ -255,10 +255,9 @@ function handleHammer(ev){
 			
 			$('.comingUp').removeClass('behind');
 
-			//
-
 			deAnimate();
 			element.css('position','absolute');
+			element.css('box-shadow','none');
 			element.css('left',picturePosition+ev.gesture.deltaX);
 
 			if(ev.gesture.deltaX<0){

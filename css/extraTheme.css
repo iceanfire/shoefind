@@ -1,11 +1,5 @@
-#toggle-wishlist{
-	position: absolute;
-	display: inline-block;
-	top: 0px;
-	right: -1px;
-}
-
 
 .ui-bar-a{
 	border-top: 0px solid black;
+	border-bottom: 0px solid black;
 }
