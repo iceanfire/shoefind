@@ -228,8 +228,6 @@ function destroyOld(){
 }
 
 function buildNew(randomItem){
-	
-
 	var backgroundImg = "url('"+randomItem[2]+"')";
 	newProduct = $('<div class="behind imageBox"></div>').css('background-image', backgroundImg);
 
