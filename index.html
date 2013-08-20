@@ -19,7 +19,7 @@
 	
 	<body>
 		<div data-role="page">
-			<div data-role="header" data-theme="a">
+			<div data-role="header" data-theme="a" data-position="fixed">
 				<img id="logo" src="images/logoX2.jpg" />
 				<div id="toggle-wishlist" value="Wishlist">
 					<img src="images/wishList.jpg" />
@@ -31,19 +31,6 @@
 				<div id="pictureWrapper">
 
 				</div>
-			<!--	<div id="slider" class="imageBox animateRock">
-				</div>
-				<div class="behind comingUp imageBox">
-				</div>
-				<div class="behind imageBox">
-				</div>
-				<div class="behind imageBox">
-				</div>
-				<div class="behind imageBox">
-				</div>
-				<div class="behind imageBox">
-				</div> -->
-
 				<div data-role="wishlist" id="wishlist" class="hidden">
 
 				</div>
@@ -51,9 +38,23 @@
 			<div data-role="content" id="instructions">
 				<img src="images/instructionsX2.jpg" />
 			</div>
+			<div data-role="popup" id="instrDialog" data-overlay-theme="a" data-theme="a" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
+				<img src="images/instructionsAll.jpg" style="width: 280px; display: block; margin:auto;" onclick="$('.ui-dialog').dialog('close');"/>		
+			</div>
 		</div>
 	</body>
 
 	<script src="js/tinder.js"></script>
+
+	<script type="text/javascript">
+		$(":jqmData(role='page'):last").on("pageinit", function(event) {
+			setTimeout(function () {
+        		$("#instrDialog").popup("open");
+			}, 10);
+        });
+		$(document).on('pageshow', function(){
+			//$('#instrDialog').popup('open');
+		})
+	</script>
 
 </html>

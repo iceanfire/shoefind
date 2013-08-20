@@ -48,21 +48,25 @@ Array.prototype.getUnique = function(){
 function initialize(data){
 	//Setup page at bootup
 	//the dataset will include:[ id (key), price, imagelink, productlink,name]
-	var sliderHtml = '<div id="slider" class="imageBox animateRock" data-id="' + asosData[0][0] + 
-					 '" data-price="' + asosData[0][1] +
-					 '" data-image="' + asosData[0][2] +
-					 '" data-link="' + asosData[0][3] +
-					 '" data-name="' + asosData[0][4] +
+
+	
+	var randomItem = Math.floor(Math.random()*asosData.length);
+	
+	var sliderHtml = '<div id="slider" class="imageBox animateRock" data-id="' + asosData[randomItem][0] + 
+					 '" data-price="' + asosData[randomItem][1] +
+					 '" data-image="' + asosData[randomItem][2] +
+					 '" data-link="' + asosData[randomItem][3] +
+					 '" data-name="' + asosData[randomItem][4] +
 					 '"></div>';
 	var behindHtml = '<div class="behind imageBox"></div>';
 	var comingUpHtml = '<div class="behind comingUp imageBox"></div>';
-	var productNameHtml = '<div class="productName animate">' + asosData[0][4] + ' - £' + asosData[0][1] + ' </div>';
+	var productNameHtml = '<div class="productName animate">' + asosData[randomItem][4] + ' - £' + asosData[randomItem][1] + ' </div>';
 
 	$('#pictureWrapper').html(sliderHtml);
 	$('#homeContent').append(productNameHtml);
-	$('#slider').css('background-image','url('+asosData[0][2]+')').hammer({drag_lock_to_axis:true}).on("release dragleft dragright swipeleft swiperight", handleHammer);
+	$('#slider').css('background-image','url('+asosData[randomItem][2]+')').hammer({drag_lock_to_axis:true}).on("release dragleft dragright swipeleft swiperight", handleHammer);
 
-	var numOfInitials = 10;
+	var numOfInitials = 15;
 	
 	for(var i=1; i<numOfInitials; i++)
 	{
@@ -76,17 +80,30 @@ function initialize(data){
 	}
 
 	$('.behind').each(function(index){
-		arrayNum = index+1;
+		randomItem = Math.floor(Math.random()*asosData.length);
+		arrayNum = randomItem;
+		//arrayNum = index+1;
 		var backgroundImg = "url('"+data[arrayNum][2]+"')";
-		//$(this).css('background-image',backgroundImg);
-		$(this).css('background-color','grey');
+		$(this).css('background-image',backgroundImg);
+
+		$(this).attr({
+			"data-id": data[arrayNum][0],
+			"data-price": data[arrayNum][1],
+			"data-image": data[arrayNum][2],
+			"data-link": data[arrayNum][3],
+			"data-name": data[arrayNum][4]
+		});
+
+		//***************************************
+		//$(this).css('background-color','grey');
 	})
 
 	element = $('#slider');
 	productName = $('.productName');
 
 	buildWishList();
-
+	
+	//Code behind showing the wish list
 	$('#toggle-wishlist').click(function() {
 		$('#wishlist').toggleClass("hidden");
 	});
@@ -102,7 +119,7 @@ function initWishList() {
 	} else {
 		wishList = [];
 	}
-	localStorage.setItem("wishList", JSON.stringify(wishList));
+	localStorage.setItem("wishList", JSON.stringify(wishList)); //?why do we have to set it if it already exists? 
 }
 
 function removeWishListItem(dataId) {
@@ -206,21 +223,24 @@ function destroyOld(){
 	element.hammer({drag_lock_to_axis:true}).on("release dragleft dragright swipeleft swiperight", handleHammer);
 	
 	var randomItem = Math.floor(Math.random()*asosData.length) //this may have to change
-	element.css('background-image','url(' + asosData[randomItem][2] + ')');
+	//element.css('background-image','url(' + asosData[randomItem][2] + ')'); -- to be deleted. 
 	buildNew(asosData[randomItem]);
 }
 
 function buildNew(randomItem){
-	element.attr({
+	
+
+	var backgroundImg = "url('"+randomItem[2]+"')";
+	newProduct = $('<div class="behind imageBox"></div>').css('background-image', backgroundImg);
+
+	newProduct.attr({
 		"data-id": randomItem[0],
 		"data-price": randomItem[1],
 		"data-image": randomItem[2],
 		"data-link": randomItem[3],
 		"data-name": randomItem[4]
 	});
-
-	var backgroundImg = "url('"+randomItem[2]+"')";
-	newProduct = $('<div class="behind imageBox"></div>').css('background-image', backgroundImg);
+	//newProduct = $('<div class="behind imageBox"></div>').css('background-color', 'grey');
 	$('#pictureWrapper').append(newProduct);
 
 	productName.append(randomItem[4] + ' - £' + randomItem[1]);
@@ -315,5 +335,4 @@ function handleHammer(ev){
 
 	}
 }
-
 
