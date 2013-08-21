@@ -28,21 +28,6 @@
 
 
 
-//Analytics Code
-function sendEvent(category, action, label, value){
-	productionUrl = ["shoefinder.appspot.com","nexturl.."];
-	stagingUrl = "";
-
-	if(document.URL.indexOf(productionUrl)>=0){
-		ga('send', 'event', category, action, label, value);
-		console.log('Event Sent to GA');
-	}
-	else{
-		console.log('Event triggered but not sent to GA');
-	}
-}
-//End Analytics Code
-
 var element = null;
 var productName = null;
 
