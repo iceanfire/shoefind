@@ -28,7 +28,20 @@
 
 
 
+//Analytics Code
+function sendEvent(category, action, label, value){
+	productionUrl = ["shoefinder.appspot.com","nexturl.."];
+	stagingUrl = "";
 
+	if(document.URL.indexOf(productionUrl)>=0){
+		ga('send', 'event', category, action, label, value);
+		console.log('Event Sent to GA');
+	}
+	else{
+		console.log('Event triggered but not sent to GA');
+	}
+}
+//End Analytics Code
 
 var element = null;
 var productName = null;
@@ -107,6 +120,7 @@ function initialize(data){
 	$('#toggle-wishlist').click(function() {
 		$('#wishlist').toggleClass("hidden");
 	});
+
 }
 
 initialize(asosData);
@@ -205,6 +219,9 @@ function addToWishList() {
 
 		localStorage.setItem("wishList", JSON.stringify(wishList));
 	}
+
+	sendEvent('shoe', 'like', 'price', parseInt(element.attr('data-price')));
+
 }
 
 function destroyOld(){
@@ -295,7 +312,7 @@ function handleHammer(ev){
 				}
 			}
 
-			console.log(ev.gesture.velocityX);
+			//console.log(ev.gesture.velocityX);
 
 			break;
 		case 'swipeleft':
@@ -321,7 +338,8 @@ function handleHammer(ev){
 			else{
 				
 				if(ev.gesture.deltaX<0){
-					element.css('left','-1000px');	
+					element.css('left','-1000px');
+					sendEvent('shoe', 'dislike', 'price', parseInt(element.attr('data-price')));
 				}
 				else{
 					element.css('left','1000px');
