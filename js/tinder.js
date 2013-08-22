@@ -218,9 +218,11 @@ function destroyOld(){
 
 	element = $('#slider');
 	//element.css('background-image',$('.imageBox').css('background-image'));
-
+	
 	$('.comingUp').removeClass('comingUp');
+	console.log('removed comingUp');
 	$('.behind').first().addClass('comingUp')
+	console.log('added comingUp to the right class');
 
 	element.hammer({drag_lock_to_axis:true}).on("release dragleft dragright swipeleft swiperight", handleHammer);
 	
@@ -244,6 +246,8 @@ function buildNew(randomItem){
 	$('#pictureWrapper').append(newProduct);
 
 	productName.append(randomItem[4] + ' - £' + randomItem[1]);
+
+	console.log('built new one'+randomItem[2]);
 }
 
 

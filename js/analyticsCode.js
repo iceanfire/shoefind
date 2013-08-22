@@ -49,8 +49,9 @@ if (!Array.prototype.indexOf) {
 //event send function. Special function because now we have a central place to log & control how events are sent to GA
 function sendEvent(category, action, label, value){
 	productionUrl = ["http://shoefind.appspot.com/","http://shoefind.appspot.com","http://www.projectperfectshoe.com/","http://www.projectperfectshoe.com"];
-	stagingUrl = "";
-	if(document.URL.indexOf("1.")>=0){
+	teamUrl = "1."
+	stagingUrl = "2.";
+	if(document.URL.indexOf(teamUrl)>=0||document.URL.indexOf(stagingUrl)>=0){
 		console.log('Event triggered but not sent to GA-admin');
 	}
 	else if(productionUrl.indexOf(document.URL)>=0){
@@ -79,5 +80,6 @@ $('.ui-dialog-contain img').click(function(){
 })
 
 $('.remove').on('click', function(){
-	sendEvent('ux', 'click', 'deleteItem');
+	//this was causing bugs, so I've disabled it for now
+	//sendEvent('ux', 'click', 'deleteItem');
 })
