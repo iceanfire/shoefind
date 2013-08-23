@@ -22,6 +22,9 @@
 	
 	<body>
 		<div data-role="page">
+			<div data-role="content" id="" style="padding: 0px;">
+				<img src="images/freeShip.jpg" width="200px" style="display: block; margin: auto;" />
+			</div>
 			<div data-role="header" data-theme="a" data-position="fixed">
 				<img id="logo" src="images/logoX2.jpg" />
 				<div id="toggle-wishlist" value="Wishlist">
@@ -41,23 +44,17 @@
 			<div data-role="content" id="instructions">
 				<img src="images/instructionsX2.jpg" />
 			</div>
-			<div data-role="popup" id="instrDialog" data-overlay-theme="a" data-theme="a" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
-				<img src="images/instructionsAll.jpg" style="width: 280px; display: block; margin:auto;" onclick="$('.ui-dialog').dialog('close');"/>		
+			<div id="instructionsPopup" data-role="dialog" data-url="/html/instructions.html" data-external-page="true" tabindex="0" class="ui-page ui-page-theme-a ui-dialog ui-page-active" style="height: 100%;">
+				<div role="dialog" class="ui-dialog-contain ui-overlay-shadow ui-corner-all" style="max-width:320px">
+					<img src="images/instructionsAll.jpg" style="width: 280px; display: block; margin:auto;" onclick="$('#instructionsPopup').fadeOut();">		
+				</div>
 			</div>
 		</div>
 	</body>
 
+	<script src="js/analyticsCode.js"></script>
 	<script src="js/tinder.js"></script>
-
-	<script type="text/javascript">
-		$(":jqmData(role='page'):last").on("pageinit", function(event) {
-			setTimeout(function () {
-        		$("#instrDialog").popup("open");
-			}, 10);
-        });
-		$(document).on('pageshow', function(){
-			//$('#instrDialog').popup('open');
-		})
+	<script>
 	</script>
 
 </html>

@@ -28,8 +28,6 @@
 
 
 
-
-
 var element = null;
 var productName = null;
 
@@ -107,6 +105,7 @@ function initialize(data){
 	$('#toggle-wishlist').click(function() {
 		$('#wishlist').toggleClass("hidden");
 	});
+
 }
 
 initialize(asosData);
@@ -205,6 +204,9 @@ function addToWishList() {
 
 		localStorage.setItem("wishList", JSON.stringify(wishList));
 	}
+
+	sendEvent('shoe', 'like', 'price', parseInt(element.attr('data-price')));
+
 }
 
 function destroyOld(){
@@ -216,9 +218,11 @@ function destroyOld(){
 
 	element = $('#slider');
 	//element.css('background-image',$('.imageBox').css('background-image'));
-
+	
 	$('.comingUp').removeClass('comingUp');
+	console.log('removed comingUp');
 	$('.behind').first().addClass('comingUp')
+	console.log('added comingUp to the right class');
 
 	element.hammer({drag_lock_to_axis:true}).on("release dragleft dragright swipeleft swiperight", handleHammer);
 	
@@ -228,8 +232,6 @@ function destroyOld(){
 }
 
 function buildNew(randomItem){
-	
-
 	var backgroundImg = "url('"+randomItem[2]+"')";
 	newProduct = $('<div class="behind imageBox"></div>').css('background-image', backgroundImg);
 
@@ -244,6 +246,8 @@ function buildNew(randomItem){
 	$('#pictureWrapper').append(newProduct);
 
 	productName.append(randomItem[4] + ' - £' + randomItem[1]);
+
+	console.log('built new one'+randomItem[2]);
 }
 
 
@@ -297,7 +301,7 @@ function handleHammer(ev){
 				}
 			}
 
-			console.log(ev.gesture.velocityX);
+			//console.log(ev.gesture.velocityX);
 
 			break;
 		case 'swipeleft':
@@ -323,7 +327,8 @@ function handleHammer(ev){
 			else{
 				
 				if(ev.gesture.deltaX<0){
-					element.css('left','-1000px');	
+					element.css('left','-1000px');
+					sendEvent('shoe', 'dislike', 'price', parseInt(element.attr('data-price')));
 				}
 				else{
 					element.css('left','1000px');

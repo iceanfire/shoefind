@@ -26,7 +26,7 @@ body{
 
 #instructions{
 	text-align: center;
-	padding: 20px 0 0 0;
+	padding: 14px 0 0 0;
 	z-index: -1;
 }
 
@@ -46,7 +46,7 @@ body{
 }
 
 #homeContent{
-	padding-top: 27px;
+	padding-top: 15px;
 }
 
 .behind{
@@ -80,16 +80,18 @@ body{
 	overflow: hidden;
 	width: 300px;
 	height: 300px;
-	border-radius: 1000px;
+	border-radius: 5px;
+//	border-radius: 1000px;
 	background-position-y: -61px;
 	background-position-x: 3px;
 	margin: auto;
 	//border: 2px solid #DBDBDB;
 	box-shadow: 6px 6px 11px #F8F8F8;
+	background-size: cover;
 }
 
 .ui-page{
-	background-color: white !important; //this is to over-ride the background for square images
+	background-color: #FCFCFC !important; //this is to over-ride the background for square images
 }
 
 .ui-content{
