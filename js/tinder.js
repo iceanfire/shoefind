@@ -24,6 +24,27 @@
 		window.cancelAnimationFrame = function(id) {
 			clearTimeout(id);
 		};
+
+	$("#like_btn").click(function() {
+		$('.comingUp').removeClass('behind');
+
+			deAnimate();
+			element.css('position','absolute');
+			element.css('box-shadow','none');
+			
+		addToWishList();
+		destroyOld();
+	});
+
+	$("#dislike_btn").click(function() {
+		$('.comingUp').removeClass('behind');
+
+			deAnimate();
+			element.css('position','absolute');
+			element.css('box-shadow','none');
+	
+		destroyOld();
+	});
 }());
 
 
@@ -277,6 +298,11 @@ function handleHammer(ev){
 			//if(element.css('left')!="auto")	{var picturePosition = parseInt(element.css('left').replace("px",""));}
 			//else{ var picturePosition = 0; }
 			
+			comingUpElt = $('.comingUp');
+			console.log(comingUpElt.length);
+			if (comingUpElt.length <=0) {
+				console.log("NO ITEM!!!");
+			}
 			$('.comingUp').removeClass('behind');
 
 			deAnimate();
