@@ -343,7 +343,7 @@ function handleHammer(ev){
 			break;
 		case 'release':
 			animate();
-			if(Math.abs(ev.gesture.deltaX)<(element.width()/2)&&ev.gesture.velocityX<.2){
+			if(Math.abs(ev.gesture.deltaX)<2&&ev.gesture.velocityX<.1){
 
 				element.css('position','static');
 				element.css('left','auto');
