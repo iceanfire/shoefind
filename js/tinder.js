@@ -240,7 +240,7 @@ function destroyOld(){
 
 	element = $('#slider');
 	//element.css('background-image',$('.imageBox').css('background-image'));
-	$('.comingUp').removeClass('behind');
+	//$('.comingUp').removeClass('behind');
 	$('.comingUp').removeClass('comingUp');
 	console.log('removed comingUp');
 	$('.behind').first().addClass('comingUp')
