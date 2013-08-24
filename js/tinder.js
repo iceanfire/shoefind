@@ -303,7 +303,9 @@ function handleHammer(ev){
 			if (comingUpElt.length <=0) {
 				console.log("NO ITEM!!!");
 			}
-			$('.comingUp').removeClass('behind');
+			console.log("BEFORE: " + comingUpElt.attr('class'));
+			comingUpElt.removeClass('behind');
+			console.log("AFTER:  " + comingUpElt.attr('class'));
 
 			deAnimate();
 			element.css('position','absolute');
