@@ -334,6 +334,14 @@ function handleHammer(ev){
 			break;
 		case 'swipeleft':
 			animate();
+			comingUpElt = $('.comingUp');
+			console.log(comingUpElt.length);
+			if (comingUpElt.length <=0) {
+				console.log("SWIPE NO ITEM!!!");
+			}
+			console.log("SWIPE BEFORE: " + comingUpElt.attr('class'));
+			comingUpElt.removeClass('behind');
+			console.log("SWIPE AFTER:  " + comingUpElt.attr('class'));
 			element.css('left','-1000px');
 
 		//	ev.gesture.stopDetect();
