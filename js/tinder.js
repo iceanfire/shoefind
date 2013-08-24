@@ -289,7 +289,8 @@ function rotate(deg){
 
 
 function handleHammer(ev){
-	console.log('runHandle');
+	console.log("RAN CALLBACK");
+	console.log(ev);
 	//disable browser scrolling
 	ev.gesture.preventDefault();
 	picturePosition = 0;
