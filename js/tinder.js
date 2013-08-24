@@ -51,6 +51,7 @@
 
 var element = null;
 var productName = null;
+var releaseNum = 0;
 
 Array.prototype.getUnique = function(){
    var u = {}, a = [];
@@ -231,15 +232,15 @@ function addToWishList() {
 }
 
 function destroyOld(){
-	element.remove();
 	element.hammer().off("release dragleft dragright swipeleft swiperight");
+	element.remove();
 	productName.empty();
 
 	$('.comingUp').attr('id','slider');
 
 	element = $('#slider');
 	//element.css('background-image',$('.imageBox').css('background-image'));
-	
+	$('.comingUp').removeClass('behind');
 	$('.comingUp').removeClass('comingUp');
 	console.log('removed comingUp');
 	$('.behind').first().addClass('comingUp')
@@ -288,6 +289,7 @@ function rotate(deg){
 
 
 function handleHammer(ev){
+	console.log('runHandle');
 	//disable browser scrolling
 	ev.gesture.preventDefault();
 	picturePosition = 0;
@@ -361,7 +363,7 @@ function handleHammer(ev){
 				$('.comingUp').addClass('behind');
 			}
 			else{
-				
+				releaseNum = releaseNum+1;
 				if(ev.gesture.deltaX<0){
 					element.css('left','-1000px');
 					sendEvent('shoe', 'dislike', 'price', parseInt(element.attr('data-price')));
