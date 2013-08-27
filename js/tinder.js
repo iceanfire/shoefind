@@ -47,8 +47,8 @@ function initialize(data){
 	//Setup page at bootup
 	//the dataset will include:[ id (key), price, imagelink, productlink,name]
 
-	
 	var randomItem = Math.floor(Math.random()*asosData.length);
+	var numOfInitials = 15;
 	
 	var sliderHtml = '<div id="slider" class="imageBox animateRock" data-id="' + asosData[randomItem][0] + 
 					 '" data-price="' + asosData[randomItem][1] +
@@ -63,8 +63,6 @@ function initialize(data){
 	$('#pictureWrapper').html(sliderHtml);
 	$('#homeContent').append(productNameHtml);
 	$('#slider').css('background-image','url('+asosData[randomItem][2]+')').hammer({drag_lock_to_axis:true}).on("release dragleft dragright swipeleft swiperight", handleHammer);
-
-	var numOfInitials = 15;
 	
 	for(var i=1; i<numOfInitials; i++)
 	{
@@ -210,15 +208,15 @@ function addToWishList() {
 }
 
 function destroyOld(){
-	element.remove();
 	element.hammer().off("release dragleft dragright swipeleft swiperight");
+	element.remove();
 	productName.empty();
 
 	$('.comingUp').attr('id','slider');
 
 	element = $('#slider');
-	//element.css('background-image',$('.imageBox').css('background-image'));
-	
+
+	//$('.comingUp').removeClass('behind'); //this makes sure that the 'behind' class is removed.
 	$('.comingUp').removeClass('comingUp');
 	console.log('removed comingUp');
 	$('.behind').first().addClass('comingUp')
@@ -316,6 +314,7 @@ function handleHammer(ev){
 		//	ev.gesture.stopDetect();
 			break;
 		case 'release':
+			console.log('release');
 			animate();
 			if(Math.abs(ev.gesture.deltaX)<(element.width()/2)&&ev.gesture.velocityX<.2){
 
