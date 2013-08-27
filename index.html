@@ -21,11 +21,20 @@
 	</head>
 	
 	<body>
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=1382849601943683";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
 		<div data-role="page">
 			<div data-role="content" id="" style="padding: 0px;">
 				<img src="images/freeShip.jpg" width="200px" style="display: block; margin: auto;" />
 			</div>
 			<div data-role="header" data-theme="a" data-position="fixed">
+				<div class="fb-like" data-href="http://2.shoefind.appspot.com/" data-width="450" data-show-faces="false" data-send="false"></div>
 				<img id="logo" src="images/logoX2.jpg" />
 				<div id="toggle-wishlist" value="Wishlist">
 					<img src="images/wishList.jpg" />
