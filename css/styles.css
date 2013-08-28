@@ -2,6 +2,17 @@ body{
 
 }
 
+iframe {
+	width: 75px;
+}
+
+#like-button-inner {
+	position: relative;
+	width: 75px;
+	bottom: 50px;
+	margin: 0 auto;
+}
+
 #overlay{
 	position:absolute;
 	top: 0px;
