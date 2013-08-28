@@ -62,7 +62,7 @@ function initialize(data){
 
 	$('#pictureWrapper').html(sliderHtml);
 	$('#homeContent').append(productNameHtml);
-	$('#slider').css('background-image','url('+asosData[randomItem][2]+')').hammer({drag_lock_to_axis:true}).on("release dragleft dragright swipeleft swiperight", handleHammer);
+	$('#slider').css('background-image','url('+asosData[randomItem][2]+')').hammer({drag_lock_to_axis:true}).on("release dragleft dragright", handleHammer);
 	
 	for(var i=1; i<numOfInitials; i++)
 	{
@@ -208,7 +208,7 @@ function addToWishList() {
 }
 
 function destroyOld(){
-	element.hammer().off("release dragleft dragright swipeleft swiperight");
+	element.hammer().off("release dragleft dragright");
 	element.remove();
 	productName.empty();
 
@@ -222,7 +222,7 @@ function destroyOld(){
 	$('.behind').first().addClass('comingUp')
 	console.log('added comingUp to the right class');
 
-	element.hammer({drag_lock_to_axis:true}).on("release dragleft dragright swipeleft swiperight", handleHammer);
+	element.hammer({drag_lock_to_axis:true}).on("release dragleft dragright", handleHammer);
 	
 	var randomItem = Math.floor(Math.random()*asosData.length) //this may have to change
 	//element.css('background-image','url(' + asosData[randomItem][2] + ')'); -- to be deleted. 
