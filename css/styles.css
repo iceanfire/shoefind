@@ -3,9 +3,12 @@ body{
 }
 
 iframe {
-	position: fixed;
-	left: 62%;
-	top: 4%;
+	margin: 0 auto;
+}
+
+#like-button {
+	position: relative;
+	bottom: 50px;
 }
 
 #overlay{
