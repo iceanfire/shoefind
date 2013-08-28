@@ -3,7 +3,7 @@ body{
 }
 
 iframe {
-	
+	width: 75px;
 }
 
 #like-button {
@@ -12,6 +12,7 @@ iframe {
 
 #like-button-inner {
 	position: relative;
+	width: 75px;
 	bottom: 50px;
 	margin: 0 auto;
 }
