@@ -3,7 +3,9 @@ body{
 }
 
 iframe {
-	
+	position: fixed;
+	left: 62%;
+	top: 4%;
 }
 
 #overlay{
