@@ -1,48 +1,50 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Tinder for Shoes</title>
+		<title>Find your perfect shoe</title>
 		<meta charset="utf-8"/>
 		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
 		
 		<!--		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0-alpha.1/jquery.mobile-1.4.0-alpha.1.min.css" />-->
-		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile.structure-1.3.2.min.css" />
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0-alpha.2/jquery.mobile.structure-1.4.0-alpha.2.css" />
 		<link rel="stylesheet" href="css/lightBlueTheme.css" />
 		<link rel="stylesheet" href="css/styles.css" />
 		<link rel="stylesheet" href="css/extraTheme.css" />
 
-		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-		<script src="http://code.jquery.com/mobile/1.4.0-alpha.1/jquery.mobile-1.4.0-alpha.1.min.js"></script>
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.0-alpha.2/jquery.mobile-1.4.0-alpha.2.min.js"></script>
 		<script src="js/jquery.hammer.js"> </script>
 		<script src="js/productData.js"></script>
 	</head>
 	
 	<body>
-		<div data-role="page">
-			<div data-role="content" id="" style="padding: 0px;">
-				<img src="images/freeShip.jpg" width="200px" style="display: block; margin: auto;" />
+		{% include '/include/fbCode.html' %}
+		<div data-role="page" id="login">
+			<div data-role="content" style="padding-top:0px">
+				<img id="fbLoginBtn" src="images/FacebookButton.png" />
+				<img class="mobileOnly" src="images/mobileOnlyHeader.png" style="width:300px" />
+				<iframe class="mobileOnly" width="420" height="315" src="//www.youtube.com/embed/bbWh8TLStQg?rel=0" frameborder="0" allowfullscreen></iframe>
+				<img class="mobileOnly" src="images/mobileOnlyFooter.png" style="width:300px" />
 			</div>
-			<div data-role="header" data-theme="a" data-position="fixed" data-tap-toggle="false">
-				<img id="logo" src="images/logoX2.jpg" />
-				<div id="toggle-wishlist" value="Wishlist">
-					<img src="images/wishList.jpg" />
-				</div>
-									<!-- <input type="button" id="toggle-wishlist" value="Wishlist" />-->
-			</div>
+		</div>
 
+		<div data-role="page" id="home">
+			<div data-role="panel" id="wishlist" class="" data-position="right" data-display="push"></div>
+			<img src="images/thumbsUp.png" id="thumbUp" class="animate thumb action" />
+			<img src="images/thumbsDown.png" id="thumbDown" class="animate thumb action" />
+			{% include '/include/header.html' %}
+			
 			<div data-role="content" id="homeContent">
 				<div id="pictureWrapper">
 
 				</div>
-				<div data-role="wishlist" id="wishlist" class="hidden">
-
-				</div>
+				
 			</div>
 			<div data-role="content" id="instructions">
 				<img src="images/instructionsX2.jpg" />
 			</div>
 			<div id="instructionsPopup" data-role="dialog" data-url="/html/instructions.html" data-external-page="true" tabindex="0" class="ui-page ui-page-theme-a ui-dialog ui-page-active" style="height: 100%;">
-				<div role="dialog" class="ui-dialog-contain ui-overlay-shadow ui-corner-all" style="max-width:320px">
+				<div class="">
 					<img src="images/instructionsAll.jpg" style="width: 280px; display: block; margin:auto;" onclick="$('#instructionsPopup').fadeOut();">		
 				</div>
 			</div>
@@ -51,7 +53,11 @@
 
 	<script src="js/analyticsCode.js"></script>
 	<script src="js/tinder.js"></script>
-	<script>
+	<script src="js/facebook.js"></script>
+
+	<script type="text/javascript">
+		//Setup Thumbnails
+		$('#thumbUp').css('left',parseInt($('#slider').css('margin-left'))+20);	
 	</script>
 
 </html>

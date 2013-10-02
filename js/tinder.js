@@ -46,6 +46,10 @@ Array.prototype.getUnique = function(){
 function initialize(data){
 	//Setup page at bootup
 	//the dataset will include:[ id (key), price, imagelink, productlink,name]
+	//
+	
+
+	
 
 	var randomItem = Math.floor(Math.random()*asosData.length);
 	var numOfInitials = 15;
@@ -62,7 +66,7 @@ function initialize(data){
 
 	$('#pictureWrapper').html(sliderHtml);
 	$('#homeContent').append(productNameHtml);
-	$('#slider').css('background-image','url('+asosData[randomItem][2]+')').hammer({drag_lock_to_axis:true}).on("release dragleft dragright", handleHammer);
+	$('#slider').css('background-image','url('+asosData[randomItem][2]+')').hammer({drag_lock_to_axis:true}).on("release dragleft dragright dragup", handleHammer);
 	
 	for(var i=1; i<numOfInitials; i++)
 	{
@@ -101,7 +105,8 @@ function initialize(data){
 	
 	//Code behind showing the wish list
 	$('#toggle-wishlist').click(function() {
-		$('#wishlist').toggleClass("hidden");
+		$( "#wishlist" ).panel( "open");
+		//$('#wishlist').toggleClass("hidden");
 	});
 
 }
@@ -139,8 +144,9 @@ function showWishListItem(item) {
 		"style": 		"background-image: url(" + item.image + ")"
 	});
 	var newWishListRow = $('<div class="wish-list-row" id="wish-list-row-' + item.dataId + '">' +
+						 '<div class="remove">X</div>'+
 						 '<a target="_blank" href="http://m.asos.com' + item.link + '"></a>' +
-						 '<div class="remove">X</div></div>');
+						 '</div>');
 
 	newWishListRow.find('a').append(newDiv)
 							.append('<span class="item-name">' + item.name + '</span>');
@@ -222,7 +228,7 @@ function destroyOld(){
 	$('.behind').first().addClass('comingUp')
 	console.log('added comingUp to the right class');
 
-	element.hammer({drag_lock_to_axis:true}).on("release dragleft dragright", handleHammer);
+	element.hammer({drag_lock_to_axis:true}).on("release dragleft dragright dragup", handleHammer);
 	
 	var randomItem = Math.floor(Math.random()*asosData.length) //this may have to change
 	//element.css('background-image','url(' + asosData[randomItem][2] + ')'); -- to be deleted. 
@@ -268,34 +274,48 @@ function handleHammer(ev){
 	//disable browser scrolling
 	ev.gesture.preventDefault();
 	picturePosition = 0;
+	if(parseInt($('#slider').css('margin-left').replace('px',''))!=0)
+	{
+		picMargin = parseInt($('#slider').css('margin-left').replace('px',''));
+	}
 	switch(ev.type){
+		case 'dragup':
+			$('.comingUp').removeClass('behind');
+			deAnimate();
+			element.css('top',90+ev.gesture.deltaY);
+			element.css('position','absolute');
 		case 'dragright':
 		case 'dragleft':
 			//stick to the finger
-			//if(element.css('left')!="auto")	{var picturePosition = parseInt(element.css('left').replace("px",""));}
-			//else{ var picturePosition = 0; }
 			
 			$('.comingUp').removeClass('behind');
-
 			deAnimate();
+			element.css('left',picturePosition+ev.gesture.deltaX+picMargin);
 			element.css('position','absolute');
-			element.css('box-shadow','none');
-			element.css('left',picturePosition+ev.gesture.deltaX);
+			console.log('picMargin:'+picMargin+'  deltaX: '+ev.gesture.deltaX+'  picturePosition:'+picturePosition);
+
+			$('.action').css('z-index',1)	
 
 			if(ev.gesture.deltaX<0){
 				rotate('-10');
+				$('#thumbDown').css('opacity',1)
+				$('#thumbUp').css('opacity',0)
 			}
 			else{
 				rotate('+10');
+				$('#thumbUp').css('opacity',1)
+				$('#thumbDown').css('opacity',0)
 			}
 
 			
 			if(Math.abs(ev.gesture.deltaX)>(element.width()/2)){
 				if(ev.gesture.deltaX<0){
 					rotate('-20');
+					$('#thumbDown').css('opacity',1)
 				}
 				else{
 					rotate('20');
+					$('#thumbUp').css('opacity',1)
 				}
 			}
 
@@ -316,9 +336,19 @@ function handleHammer(ev){
 		case 'release':
 			console.log('release');
 			animate();
+
+			if(Math.abs(ev.gesture.deltaX)>=Math.abs(ev.gesture.deltaY)){
+				console.log('x-axis');
+			}
+			else{
+				console.log('y-axis');
+			}
+
+
 			if(Math.abs(ev.gesture.deltaX)<(element.width()/2)&&ev.gesture.velocityX<.2){
 
 				element.css('position','static');
+				element.css('top','auto');
 				element.css('left','auto');
 				rotate('0');
 				$('.comingUp').addClass('behind');
@@ -335,6 +365,10 @@ function handleHammer(ev){
 				}
 				destroyOld();
 			}
+			$('#thumbUp').css('opacity',0)
+			$('#thumbDown').css('opacity',0)
+			$('.action').css('z-index',-1)
+			
 			break;
 
 	}

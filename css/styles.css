@@ -2,8 +2,56 @@ body{
 
 }
 
+/* Smartphones ----------- */
+@media only screen and (min-width: 650px) {
+  #fbLoginBtn { display: none; }
+}
+
+@media only screen and (max-width:650px){
+	.mobileOnly {display: none;}
+	iframe {
+		
+	}
+}
+
+
+/* LOGIN PAGE STYLES */
+
+#login .ui-content{
+	text-align: center;
+}
+
+#login .ui-content #fbLoginBtn{
+	width: 300px;
+}
+
+/* HOME PAGE STYLES */
+
+.action{
+	position: absolute;
+	top: 170px;
+	z-index: -1;
+	left: 27%;
+	opacity: 0;
+	background-color: white;
+	border-radius: 15px;
+
+}
+
+.thumb{
+		width: 130px;
+}
+
+.ui-dialog-contain{
+	z-index:2;
+}
+
+
 iframe {
-	width: 75px;
+	width: 420px !important;
+	display: block;
+	margin: auto;
+	padding-bottom: 20px;
 }
 
 #like-button-inner {
@@ -72,18 +120,25 @@ iframe {
 	text-align: center;
 }
 
+.animateFast{
+	-webkit-transition: all .1s;
+	-moz-transition: all .1s;
+    -o-transition: all .1s;
+    transition: all .1s;
+}
+
 .animate{
 	-webkit-transition: all .4s;
 	-moz-transition: all .4s;
     -o-transition: all .4s;
-    transition: all .4;
+    transition: all .4s;
 }
 
 .animateRock{
-	-webkit-transition: -webkit-transform 100s;
+	-webkit-transition: -webkit-transform .4s;
 	-moz-transition: -moz-transform .4s;
     -o-transition: -o-transform .4s;
-    transition: transform 100s;
+    transition: transform .4s;
 }
 
 .imageBox{
@@ -133,7 +188,7 @@ iframe {
 	display: none;
 }
 
-#wishlist {
+#wishlist2 {
 	position: absolute;
 	top: 50px;
 	left: 0px;
@@ -172,14 +227,14 @@ iframe {
 }
 
 .wish-list-item {
-	margin-left: 20px;
-	margin-top: 7px;
-	margin-bottom: 5px;
-	margin-right: 20px;
-	width: 50px;
-	height: 50px;
+	margin-top: -12px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+	width: 245px;
+	height: 250px;
 	background-size: cover;
 	float: left;
+	background-position-y: -61px;
 }
 
 .hidden {

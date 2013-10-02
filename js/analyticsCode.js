@@ -48,7 +48,7 @@ if (!Array.prototype.indexOf) {
 
 //event send function. Special function because now we have a central place to log & control how events are sent to GA
 function sendEvent(category, action, label, value){
-	productionUrl = ["http://shoefind.appspot.com/","http://shoefind.appspot.com","http://www.projectperfectshoe.com/","http://www.projectperfectshoe.com"];
+	productionUrl = ["http://shoefind.appspot.com/","http://shoefind.appspot.com","http://www.projectperfectshoe.com/","http://www.projectperfectshoe.com","http://www.projectperfectshoe.com/#home"];
 	teamUrl = "1."
 	stagingUrl = "2.";
 	if(document.URL.indexOf(teamUrl)>=0||document.URL.indexOf(stagingUrl)>=0){
